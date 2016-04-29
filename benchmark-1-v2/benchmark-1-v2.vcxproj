@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{20268855-A5A4-4745-8BE5-F718610AD33D}</ProjectGuid>
+    <ProjectGuid>{C6E843AF-2835-425A-9CBC-9444C72A33D6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>benchmark4</RootNamespace>
+    <RootNamespace>benchmark1v2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -150,7 +150,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="benchmark-4.cpp" />
+    <ClCompile Include="benchmark-1-v2.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
