@@ -1,6 +1,3 @@
-// benchmark-4.cpp : définit le point d'entrée pour l'application console.
-//
-
 
 //-------------------------------------------------------------------------------------------------------------------------
 //
@@ -42,18 +39,18 @@ namespace win32
 #define MENU_ITEM_DISPLAY		3
 #define MENU_ITEM_EXIT 			4
 //-------------------------------------------------------------------------------------------------------------------------
-#define MATRIX_SQUARE_SIZE		150
+#define MATRIX_SQUARE_SIZE		2
 #define MATRIX_LINE_MIN			1
 #define MATRIX_LINE_MAX			10
 #define MATRIX_COL_MIN			1
 #define MATRIX_COL_MAX			10
 #define MATRIX_VALUE_MIN		-500
 #define MATRIX_VALUE_MAX		500
-#define NUMBER_OF_THREAD		5
+#define NUMBER_OF_THREAD		2
 //-------------------------------------------------------------------------------------------------------------------------
 //#define MENU_ON				// if uncommented, a menu appears
 //#define DEBUG_ON				// if uncommented, debug is displayed
-//#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
+#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
 #define BENCHMARK_ON			// if uncommented, benchmark is applying
 //-------------------------------------------------------------------------------------------------------------------------
 #pragma endregion
@@ -168,7 +165,7 @@ static void *MutiplyWithThread(void *arg);
 #ifdef BENCHMARK_ON				// benchmark for speed tests
 clock_t mclock;					// benchmark with clock_t
 timer mtimer;					// benchmark with Timer class
-double elapsed_time;			// elapsed time
+double elapsed_time = 0;			// elapsed time
 #endif // BENCHMARK_ON
 Flag *flag = new Flag();		// flags
 Data *data = new Data();		// data structure of the application
@@ -541,8 +538,8 @@ static void Display(Data *data)
 			std::cout << "\t" << (float)mclock / CLOCKS_PER_SEC << " second(s)\n";
 			std::cout << "\t" << (float)mclock << " milisecond(s)\n";
 			std::cout << "\nElapsed time with timer :\n\n";
-			std::cout << "\t" << (float)elapsed_time / 1000 << " second(s)\n";
-			std::cout << "\t" << (float)elapsed_time << " milisecond(s)\n\n\n\n";
+			std::cout << "\t" << elapsed_time / 1000 << " second(s)\n";
+			std::cout << "\t" << elapsed_time << " milisecond(s)\n\n\n\n";
 #endif // BENCHMARK_ON
 		}
 	}

@@ -38,24 +38,23 @@ namespace win32
 
 #pragma region DEFINES
 // DEFINES ----------------------------------------------------------------------------------------------------------------
-#define APP_TITLE				"Exercice 4 by Corky Maigre"
+#define APP_TITLE				"Benchmark 2 by Corky Maigre"
 #define MENU_ITEM_ENTRY			1
 #define MENU_ITEM_CALCUL		2
 #define MENU_ITEM_DISPLAY		3
 #define MENU_ITEM_EXIT 			4
 //-------------------------------------------------------------------------------------------------------------------------
-#define MATRIX_SQUARE_SIZE		2
+#define MATRIX_SQUARE_SIZE		2000
 #define MATRIX_LINE_MIN			1
 #define MATRIX_LINE_MAX			10
 #define MATRIX_COL_MIN			1
 #define MATRIX_COL_MAX			10
 #define MATRIX_VALUE_MIN		-500
 #define MATRIX_VALUE_MAX		500
-#define NUMBER_OF_THREAD		3
 //-------------------------------------------------------------------------------------------------------------------------
 //#define MENU_ON				// if uncommented, a menu appears
 //#define DEBUG_ON				// if uncommented, debug is displayed
-#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
+//#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
 #define BENCHMARK_ON			// if uncommented, benchmark is applying
 //-------------------------------------------------------------------------------------------------------------------------
 #pragma endregion
