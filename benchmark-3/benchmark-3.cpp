@@ -1,6 +1,3 @@
-// benchmark-3.cpp : définit le point d'entrée pour l'application console.
-//
-
 
 //-------------------------------------------------------------------------------------------------------------------------
 //
@@ -36,7 +33,7 @@ namespace win32
 
 #pragma region DEFINES
 // DEFINES ----------------------------------------------------------------------------------------------------------------
-#define APP_TITLE				"Exercice 4 by Corky Maigre"
+#define APP_TITLE				"Exercice 3 by Corky Maigre"
 #define MENU_ITEM_ENTRY			1
 #define MENU_ITEM_CALCUL		2
 #define MENU_ITEM_DISPLAY		3

@@ -47,7 +47,7 @@ Configuration
 Hardware Specifications
 -----------------------
 
-Using an ASUS X93S Series notebooks.
+Using an ASUS X93S Series laptop.
 
 Charasteristics | Description
 ----------------|------------
@@ -102,13 +102,14 @@ This first benchmark is created by executing the sequential code in C++. The cod
 Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
 ----------------|---------------|--------------|--------------|--------------|---------------|--------------|
 2	x 2			|4				| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-25	x 25		|625			| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-50	x 50		|2,500			| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-100 x 100		|10,000			| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-200 x 200		|40,000			| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |  
-500 x 500		|1,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-1,500 x 1,500	|2,250,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-2,000 x 2,000	|4,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
+25	x 25		|625			| 0.000144 s   | 0.000106 s   | 0.000198 s   | 0.000108 s    | 0.000106 s   |
+50	x 50		|2,500			| 0.001092 s   | 0.001143 s   | 0.001261 s   | 0.000897 s    | 0.000845 s   |
+100 x 100		|10,000			| 0.007243 s   | 0.009130 s   | 0.010531 s   | 0.012686 s    | 0.006135 s   |
+200 x 200		|40,000			| 0.069280 s   | 0.050119 s   | 0.096451 s   | 0.070126 s    | 0.080317 s   |  
+500 x 500		|250,000		| 0.908748 s   | 0.976781 s   | 0.917461 s   | 0.906997 s    | 0.935186 s   |
+1,000 x 1,000	|1,000,000		| 14.82270 s   | 14.90280 s   | 15.32160 s   | 15.16810 s    | 15.07080 s   |
+1,500 x 1,500	|2,250,000		| 51.84170 s   | 53.78350 s   | 61.38590 s   | 57.83540 s    | 57.28700 s   |
+2,000 x 2,000	|4,000,000		| 144.4250 s   | 144.3840 s   | 138.8950 s   | 136.5640 s    | 143.8150 s   |
 
 
 
@@ -156,9 +157,11 @@ Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| E
 I cannot explain the difference between elapsed 1 and 2 for a matrix 1,500 x 1,500.
 
 In the figure below you can see the performance of the computer when the mutiplication of two 2000 x 2000 matrix is performed.
+
 <img src="assets/img/bench-3-2000-computation.png" width="800px" />
 
 In the figure below you can see that the memory empties at the end of the program and then all memory is free when the executable is closed.
+
 <img src="assets/img/bench-3-2000-after.png" width="800px" />
 
 
