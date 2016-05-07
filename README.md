@@ -127,9 +127,23 @@ Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| E
 50	x 50		|2,500			| 1.956470 s   | 2.183280 s   | 5.004200 s   | 2.249170 s    | 1.905320 s   |
 100 x 100		|10,000			| 8.355190 s   | 8.410570 s   | 7.513020 s   | 7.785250 s    | 7.876830 s   |
 200 x 200		|40,000			| 32.00290 s   | 33.54810 s   | 34.70680 s   | 31.60480 s    | 32.82290 s   |  
-500 x 500		|1,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
+500 x 500		|250,000		| 210.6790 s   | 212.8600 s   | 216.6650 s   | 217.6900 s    | 221.4850 s   |
+1,000 x 1,000	|1,000,000		| 958.3180 s   | 918.7720 s   | 931.3840 s   | 905.0450 s    | 1000.510 s   |
 1,500 x 1,500	|2,250,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
 2,000 x 2,000	|4,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
+
+Before launching the console application for a square matrix of 1,000 x 1,000, the memory is low (but Visual Studio takes a big part of memory).
+
+<img src="assets/img/bench-2-1000-before.png" width="800px" />
+
+
+At the end of the console application for a square matrix of 1,000 x 1,000, the memory is full because all pointers take a lot of space and there are 1,000,000 of threads in memory.
+
+<img src="assets/img/bench-2-1000-end.png" width="800px" />
+
+When the application finished, all the memory is released.
+
+<img src="assets/img/bench-2-1000-after.png" width="800px" />
 
 
 >**NOTE**
@@ -244,6 +258,10 @@ No one has contribute to the project.
 Bugs
 ====
 
-No bugs encountered yet.
+- Error with the memory deleting:
+	- detected the 01 May 2016
+	- solved the 01 May 2016
+- Error on benchmark 4 with matrix n x n where n > 2
+	- detected the 30 April 2016
 
 

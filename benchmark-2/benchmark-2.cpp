@@ -1,6 +1,3 @@
-// benchmark-2.cpp : définit le point d'entrée pour l'application console.
-//
-
 
 //-------------------------------------------------------------------------------------------------------------------------
 //
@@ -44,7 +41,7 @@ namespace win32
 #define MENU_ITEM_DISPLAY		3
 #define MENU_ITEM_EXIT 			4
 //-------------------------------------------------------------------------------------------------------------------------
-#define MATRIX_SQUARE_SIZE		2000
+#define MATRIX_SQUARE_SIZE		1000
 #define MATRIX_LINE_MIN			1
 #define MATRIX_LINE_MAX			10
 #define MATRIX_COL_MIN			1
@@ -184,6 +181,7 @@ int main()
 	Initialize(data, true);
 	Compute(data);
 	Display(data);
+	DeleteMemory(data);
 #else
 	{
 		do
@@ -443,17 +441,11 @@ static void DeleteMatrix(Matrix *matrix)
 		delete[] matrix->array[i];
 	}
 	delete[] matrix->array;
+	delete matrix;
 }
 
 static void DeleteMemory(Data *data)
 {
-	delete[] flag;
-	if (flag->is_matrix_allocated)	// avoiding the delete of unnalloced memory
-	{
-		DeleteMatrix(data->matrix3);
-		DeleteMatrix(data->matrix2);
-		DeleteMatrix(data->matrix1);
-	}
 	if (flag->is_thread_allocated)
 	{
 		for (int i = data->matrix3->line - 1; i >= 0; i--)
@@ -464,7 +456,14 @@ static void DeleteMemory(Data *data)
 		delete[] data->thread;
 		delete[] data->thread_data;
 	}
+	if (flag->is_matrix_allocated)	// avoiding the delete of unnalloced memory
+	{
+		DeleteMatrix(data->matrix3);
+		DeleteMatrix(data->matrix2);
+		DeleteMatrix(data->matrix1);
+	}
 	delete[] data;
+	delete[] flag;
 	exit(0);
 }
 #pragma endregion

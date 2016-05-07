@@ -171,6 +171,7 @@ int main()
 	Initialize(data, true);
 	Compute(data);
 	Display(data);
+	DeleteMemory(data);
 #else
 	{
 		do
@@ -417,11 +418,11 @@ static void DeleteMatrix(Matrix *matrix)
 		delete[] matrix->array[i];
 	}
 	delete[] matrix->array;
+	delete matrix;
 }
 
 static void DeleteMemory(Data *data)
 {
-	delete[] flag;
 	if (flag->is_matrix_allocated)	// avoiding the delete of unnalloced memory
 	{
 		DeleteMatrix(data->matrix3);
