@@ -3,12 +3,12 @@ Multithreading Benchmarks
 
 This project intended to compare the performance of a console application using CPU & GPU programming.
 The console application consisted of doing a square matrix multiplication via several methods :
-- CPU Programming
-	- Sequential code
-	- Multithreading code (one thread per cell of the result matrix)
-	- Multithreading code (one thread per row of the result matrix)
-	- Multithreading code (each cell of the result matrix is assigned to one of the *n* threads)
-- GPU Programming
+- [CPU Programming]
+	- [Sequential code]
+	- [Multithreading code (one thread per cell of the result matrix)]
+	- [Multithreading code (one thread per row of the result matrix)]
+	- [Multithreading code (each cell of the result matrix is assigned to one of the *n* threads)]
+- [GPU Programming]
 Each programming method was compared each other by doing a benchmark on the elapsed time for the computation.
 
 My personal information :

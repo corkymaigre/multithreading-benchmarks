@@ -558,33 +558,36 @@ static void AllocateThread(Data *data)
 	data->thread = new pthread_t[NUMBER_OF_THREAD];				// array of threads
 	data->thread_data = new ThreadData[NUMBER_OF_THREAD];		// array of data for threads
 
-	int cell_number = 0;
-
 	// foreach thread
 	for (int n = 0; n < NUMBER_OF_THREAD; n++)
 	{
 		int a = 0;
+		int cell_number = 0;
 		// count the number of cells of the thread
-		do
+		while (cell_number <= data->matrix3->cell)
 		{
 			cell_number = n + NUMBER_OF_THREAD * a;
 			a++;
-		} while (cell_number < data->matrix3->cell);
+		};
+		a--;
 		// define the number of cells
 		data->thread_data[n].size = a;
 		// create the dynamic array of cells
 		data->thread_data[n].cells = new Cell[a];
 
-		cell_number = 0;
-		a = 0;
-		// define the i and j of each cell of the thread
-		while (cell_number < data->matrix3->cell)
+		// ERROR 
+		while (cell_number <= data->matrix3->cell)
 		{
 			cell_number = n + NUMBER_OF_THREAD * a;
-			data->thread_data[n].cells[a].i = cell_number / data->matrix3->cell;
-			data->thread_data[n].cells[a].j = cell_number % data->matrix3->cell;
+			if (cell_number <= 16)
+			{
+				int i = cell_number / data->matrix3->line;
+				int j = cell_number % data->matrix3->line;
+				data->thread_data[n].cells[a].i = cell_number / data->matrix3->line;
+				data->thread_data[n].cells[a].j = cell_number % data->matrix3->line - 1;
+			}
 			a++;
-		}
+		};
 	}
 }
 #pragma endregion
