@@ -41,7 +41,7 @@ namespace win32
 #define MENU_ITEM_DISPLAY		3
 #define MENU_ITEM_EXIT 			4
 //-------------------------------------------------------------------------------------------------------------------------
-#define MATRIX_SQUARE_SIZE		1000
+#define MATRIX_SQUARE_SIZE		100
 #define MATRIX_LINE_MIN			1
 #define MATRIX_LINE_MAX			10
 #define MATRIX_COL_MIN			1
@@ -423,6 +423,13 @@ static void Compute(Data *data)
 		mclock = clock();								// start the clock
 		mtimer.restart();								// start the timer
 		Multiply(data);											// do the multiplication for the benchmark
+		for (int i = 0; i < data->matrix3->line; i++)
+		{
+			for (int j = 0; j < data->matrix3->column; j++)
+			{
+				pthread_join(data->thread[i][j], NULL);
+			}
+		}
 		elapsed_time = mtimer.elapsed();		// stop the timer
 		mclock = clock() - mclock;			// stop the clock
 #else

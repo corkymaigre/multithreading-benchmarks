@@ -426,6 +426,10 @@ static void Compute(Data *data)
 		mclock = clock();								// start the clock
 		mtimer.restart();								// start the timer
 		Multiply(data);											// do the multiplication for the benchmark
+		/*for (int i = 0; i < data->matrix3->line-1; i++)
+		{
+			pthread_join(data->thread[i], NULL);
+		}*/
 		elapsed_time = mtimer.elapsed();		// stop the timer
 		mclock = clock() - mclock;			// stop the clock
 #else

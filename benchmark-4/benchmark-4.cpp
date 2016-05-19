@@ -39,18 +39,18 @@ namespace win32
 #define MENU_ITEM_DISPLAY		3
 #define MENU_ITEM_EXIT 			4
 //-------------------------------------------------------------------------------------------------------------------------
-#define MATRIX_SQUARE_SIZE		2
+#define MATRIX_SQUARE_SIZE		2000
 #define MATRIX_LINE_MIN			1
 #define MATRIX_LINE_MAX			10
 #define MATRIX_COL_MIN			1
 #define MATRIX_COL_MAX			10
 #define MATRIX_VALUE_MIN		-500
 #define MATRIX_VALUE_MAX		500
-#define NUMBER_OF_THREAD		2
+#define NUMBER_OF_THREAD		8
 //-------------------------------------------------------------------------------------------------------------------------
 //#define MENU_ON				// if uncommented, a menu appears
 //#define DEBUG_ON				// if uncommented, debug is displayed
-#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
+//#define DISPLAY_MATRIX_ON		// if uncommented, matrices are displayed
 #define BENCHMARK_ON			// if uncommented, benchmark is applying
 //-------------------------------------------------------------------------------------------------------------------------
 #pragma endregion
@@ -311,7 +311,7 @@ static void GenerateMatrixData(Matrix *matrix)
 			int value = 0;
 			do
 			{
-				value = rand();
+				value = rand()%MATRIX_VALUE_MAX;
 			} while ((value<MATRIX_VALUE_MIN) || (value>MATRIX_VALUE_MAX));
 			matrix->array[i][j] = value;
 		}
@@ -375,12 +375,17 @@ static void *MutiplyWithThread(void *arg)
 	ThreadData *ldata = (ThreadData*)arg;
 
 	// for each cell
-	for (int a = 0; a < ldata->size; a++)
+	for (int a = 0; a < ldata->size-1; a++)
 	{
 		int value = 0;
 		// do the matrices multiplication
 		for (int k = 0; k < data->matrix1->column; k++)
 		{
+#ifdef DEBUG_ON
+			std::cout << "\nk: " << k;
+			std::cout << "\t i: " << ldata->cells[a].i;
+			std::cout << "\t j: " << ldata->cells[a].j;
+#endif
 			value = value + data->matrix1->array[ldata->cells[a].i][k] * data->matrix2->array[k][ldata->cells[a].j];
 		}
 		// store the result in the third matrix
@@ -427,6 +432,10 @@ static void Compute(Data *data)
 		mclock = clock();								// start the clock
 		mtimer.restart();								// start the timer
 		Multiply(data);											// do the multiplication for the benchmark
+		for (int i = 0; i < NUMBER_OF_THREAD; i++)
+		{
+			pthread_join(data->thread[i], NULL);
+		}
 		elapsed_time = mtimer.elapsed();		// stop the timer
 		mclock = clock() - mclock;			// stop the clock
 #else
@@ -564,31 +573,36 @@ static void AllocateThread(Data *data)
 		int a = 0;
 		int cell_number = 0;
 		// count the number of cells of the thread
-		while (cell_number <= data->matrix3->cell)
+		while (cell_number < data->matrix3->cell)
 		{
 			cell_number = n + NUMBER_OF_THREAD * a;
 			a++;
 		};
-		a--;
+		//a--;
 		// define the number of cells
 		data->thread_data[n].size = a;
 		// create the dynamic array of cells
 		data->thread_data[n].cells = new Cell[a];
 
-		// ERROR 
-		while (cell_number <= data->matrix3->cell)
+		a = 0;
+		cell_number = 0;
+		do
 		{
 			cell_number = n + NUMBER_OF_THREAD * a;
-			if (cell_number <= 16)
+			if (cell_number < data->matrix3->cell)
 			{
-				int i = cell_number / data->matrix3->line;
-				int j = cell_number % data->matrix3->line;
 				data->thread_data[n].cells[a].i = cell_number / data->matrix3->line;
-				data->thread_data[n].cells[a].j = cell_number % data->matrix3->line - 1;
+				data->thread_data[n].cells[a].j = cell_number % data->matrix3->line;
+				#ifdef DEBUG_ON
+					std::cout << "\n i: " << data->thread_data[n].cells[a].i << " and j: " << data->thread_data[n].cells[a].j;
+				#endif
 			}
 			a++;
-		};
+		}
+		while (cell_number <= data->matrix3->cell);
+		
 	}
+	std::cout << "\ntest";
 }
 #pragma endregion
 

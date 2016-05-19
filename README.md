@@ -97,19 +97,19 @@ Each benchmark is computed for a specific use of threading.
 Benchmark 1
 -----------
 
-This first benchmark is created by executing the sequential code in C++. The code uses dynamic arrays and a 'Matrix' structure.
+This first benchmark is created by executing the sequential code with CPU in C++. The code uses dynamic arrays and a 'Matrix' structure.
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-25	x 25		|625			| 0.000144 s   | 0.000106 s   | 0.000198 s   | 0.000108 s    | 0.000106 s   |
-50	x 50		|2,500			| 0.001092 s   | 0.001143 s   | 0.001261 s   | 0.000897 s    | 0.000845 s   |
-100 x 100		|10,000			| 0.007243 s   | 0.009130 s   | 0.010531 s   | 0.012686 s    | 0.006135 s   |
-200 x 200		|40,000			| 0.069280 s   | 0.050119 s   | 0.096451 s   | 0.070126 s    | 0.080317 s   |  
-500 x 500		|250,000		| 0.908748 s   | 0.976781 s   | 0.917461 s   | 0.906997 s    | 0.935186 s   |
-1,000 x 1,000	|1,000,000		| 14.82270 s   | 14.90280 s   | 15.32160 s   | 15.16810 s    | 15.07080 s   |
-1,500 x 1,500	|2,250,000		| 51.84170 s   | 53.78350 s   | 61.38590 s   | 57.83540 s    | 57.28700 s   |
-2,000 x 2,000	|4,000,000		| 144.4250 s   | 144.3840 s   | 138.8950 s   | 136.5640 s    | 143.8150 s   |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3|
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.000000 s   | 0.000000 s   | 0.000000 s   |
+25	x 25		|625			| 0.000144 s   | 0.000106 s   | 0.000198 s   |
+50	x 50		|2,500			| 0.001092 s   | 0.001143 s   | 0.001261 s   |
+100 x 100		|10,000			| 0.007243 s   | 0.009130 s   | 0.010531 s   |
+200 x 200		|40,000			| 0.069280 s   | 0.050119 s   | 0.096451 s   | 
+500 x 500		|250,000		| 0.908748 s   | 0.976781 s   | 0.917461 s   |
+1,000 x 1,000	|1,000,000		| 14.82270 s   | 14.90280 s   | 15.32160 s   |
+1,500 x 1,500	|2,250,000		| 51.84170 s   | 53.78350 s   | 61.38590 s   |
+2,000 x 2,000	|4,000,000		| 144.4250 s   | 144.3840 s   | 138.8950 s   |
 
 
 
@@ -117,20 +117,20 @@ Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| E
 Benchmark 2
 -----------
 
-The second benchmark is created by executing the parallel code in C++ using pthread.
+The second benchmark is created by executing the parallel code with CPU in C++ using pthread.
 The code uses dynamic arrays and a dynamic number of threads. Each cell in the result matrix is performed by one thread.
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 0.001818 s   | 0.000263 s   | 0.001539 s   | 0.005473 s    | 0.001581 s   |
-25	x 25		|625			| 0.651238 s   | 0.641366 s   | 0.383544 s   | 0.528443 s    | 0.590903 s   |
-50	x 50		|2,500			| 1.956470 s   | 2.183280 s   | 5.004200 s   | 2.249170 s    | 1.905320 s   |
-100 x 100		|10,000			| 8.355190 s   | 8.410570 s   | 7.513020 s   | 7.785250 s    | 7.876830 s   |
-200 x 200		|40,000			| 32.00290 s   | 33.54810 s   | 34.70680 s   | 31.60480 s    | 32.82290 s   |  
-500 x 500		|250,000		| 210.6790 s   | 212.8600 s   | 216.6650 s   | 217.6900 s    | 221.4850 s   |
-1,000 x 1,000	|1,000,000		| 958.3180 s   | 918.7720 s   | 931.3840 s   | 905.0450 s    | 1000.510 s   |
-1,500 x 1,500	|2,250,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
-2,000 x 2,000	|4,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 0.000000 s    | 0.000000 s   |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3|
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.001818 s   | 0.000263 s   | 0.001539 s   |
+25	x 25		|625			| 0.651238 s   | 0.641366 s   | 0.383544 s   |
+50	x 50		|2,500			| 1.956470 s   | 1.784130 s   | 1.783190 s   |
+100 x 100		|10,000			| 8.355190 s   | 8.410570 s   | 7.513020 s   | 
+200 x 200		|40,000			| 32.00290 s   | 33.54810 s   | 34.70680 s   |  
+500 x 500		|250,000		| 210.6790 s   | 212.8600 s   | 216.6650 s   |
+1,000 x 1,000	|1,000,000		| 958.3180 s   | 918.7720 s   | 931.3840 s   |
+1,500 x 1,500	|2,250,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   | 
+2,000 x 2,000	|4,000,000		| 0.000000 s   | 0.000000 s   | 0.000000 s   |
 
 Before launching the console application for a square matrix of 1,000 x 1,000, the memory is low (but Visual Studio takes a big part of memory).
 
@@ -154,21 +154,21 @@ When the application finished, all the memory is released.
 Benchmark 3
 -----------
 
-The third benchmark is created by executing the parallel code in C++ using pthread.
+The third benchmark is created by executing the parallel code with CPU in C++ using pthread.
 The code uses dynamic arrays and a dynamic number of threads. Each row in the result matrix is performed by one thread.
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 0.000655 s   | 0.000203 s   | 0.000496 s   | 0.000171 s    | 0.000187 s   |
-25	x 25		|625			| 0.010548 s   | 0.011697 s   | 0.016335 s   | 0.021629 s    | 0.017597 s   |
-50	x 50		|2,500			| 0.022197 s   | 0.023205 s   | 0.029736 s   | 0.024637 s    | 0.028992 s   |
-100 x 100		|10,000			| 0.053766 s   | 0.074381 s   | 0.043908 s   | 0.066718 s	 | 0.059816 s   |
-200 x 200		|40,000			| 0.118335 s   | 0.112993 s   | 0.104711 s   | 0.165889 s	 | 0.254931 s   |  
-500 x 500		|1,000,000		| 0.708654 s   | 0.537136 s   | 0.569650 s   | 0.527360 s    | 0.493854 s   |
-1,500 x 1,500	|2,250,000		| 25.71800 s   | 5.512310 s   | 3.487280 s   | 23.34210 s    | 26.98990 s   |
-2,000 x 2,000	|4,000,000		| 51.79730 s   | 32.06580 s   | 50.01410 s   | 60.21770 s    | 53.90000 s   |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| 
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.000655 s   | 0.000203 s   | 0.000496 s   | 
+25	x 25		|625			| 0.010548 s   | 0.011697 s   | 0.016335 s   | 
+50	x 50		|2,500			| 0.022197 s   | 0.023205 s   | 0.029736 s   | 
+100 x 100		|10,000			| 0.053766 s   | 0.074381 s   | 0.043908 s   | 
+200 x 200		|40,000			| 0.118335 s   | 0.112993 s   | 0.104711 s   | 
+500 x 500		|250,000		| 0.907414 s   | 1.284270 s   | 1.133060 s   | 
+1,000 x 1,000	|1,000,000		| 8.618210 s   | 8.505290 s   | 8.367430 s   | 
+1,500 x 1,500	|2,250,000		| 25.71800 s   | 27.26910 s   | 25.96100 s   | 
+2,000 x 2,000	|4,000,000		| 51.79730 s   | 32.06580 s   | 50.01410 s   | 
 
-I cannot explain the difference between elapsed 1 and 2 for a matrix 1,500 x 1,500.
 
 In the figure below you can see the performance of the computer when the mutiplication of two 2000 x 2000 matrix is performed.
 
@@ -186,60 +186,100 @@ In the figure below you can see that the memory empties at the end of the progra
 Benchmark 4
 -----------
 
-The fourth benchmark is created by executing the parallel code in C++ using pthread.
+The fourth benchmark is created by executing the parallel code with CPU in C++ using pthread.
 The code uses dynamic arrays and a dynamic number of threads.
 Cells in the result matrix are performed by one of the threads according to a shifting algorithm.
 
 ### Number of threads: 2
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 0.535821 ms  | 1.885420 ms  | 0.584571 ms  | 0.173618 ms   | 1.522790 ms  |
-25	x 25		|625			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-50	x 50		|2,500			| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-100 x 100		|10,000			| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms	 | 0.000000 ms  |
-200 x 200		|40,000			| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms	 | 0.000000 ms  |  
-500 x 500		|1,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-1,500 x 1,500	|2,250,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-2,000 x 2,000	|4,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| 
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.003897 s   | 0.001216 s   | 0.001205 s   | 
+25	x 25		|625			| 0.001716 s   | 0.001528 s   | 0.001156 s   |
+50	x 50		|2,500			| 0.006530 s   | 0.002301 s   | 0.002024 s   | 
+100 x 100		|10,000			| 0.007007 s   | 0.052376 s   | 0.011554 s   | 
+200 x 200		|40,000			| 0.056970 s   | 0.046925 s   | 0.050223 s   | 
+500 x 500		|250,000		| 0.920728 s   | 1.089180 s   | 1.085580 s   | 
+1,000 x 1,000	|1,000,000		| 11.11410 s   | 10.93310 s   | 10.65640 s   | 
+1,500 x 1,500	|2,250,000		| 39.03960 s   | 37.91340 s   | 38.91380 s   | 
+2,000 x 2,000	|4,000,000		| 101.9630 s   | 102.7530 s   | 100.9980 s   | 
 
-Error: the result matrix is not correct with matrix 3x3 and plus.
 
 
 ### Number of threads: 3
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 3.163180 ms  | 1.684440 ms  | 0.687203 ms  | 0.855262 ms   | 1.056250 ms  |
-25	x 25		|625			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-50	x 50		|2,500			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-100 x 100		|10,000			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-200 x 200		|40,000			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       | 
-500 x 500		|1,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-1,500 x 1,500	|2,250,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-2,000 x 2,000	|4,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| 
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.001545 s   | 0.001774 s   | 0.030921 s   | 
+25	x 25		|625			| 0.001572 s   | 0.007728 s   | 0.001804 s   |   
+50	x 50		|2,500			| 0.003861 s   | 0.003202 s   | 0.005808 s   | 
+100 x 100		|10,000			| 0.006439 s   | 0.011860 s   | 0.011267 s   | 
+200 x 200		|40,000			| 0.039320 s   | 0.059699 s   | 0.054823 s   | 
+500 x 500		|250,000		| 0.713641 s   | 0.761757 s   | 0.725308 s   | 
+1,000 x 1,000	|1,000,000		| 8.023100 s   | 7.817020 s   | 7.643520 s   | 
+1,500 x 1,500	|2,250,000		| 29.89010 s   | 30.31270 s   | 30.57400 s   | 
+2,000 x 2,000	|4,000,000		| 92.73030 s   | 83.12000 s   | 86.39570 s   | 
 
-Error: the result matrix is not correct.
 
 
 ### Number of threads: 4
 
-Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| Elapsed Time 4|Elapsed Time 5|
-----------------|---------------|--------------|--------------|--------------|---------------|--------------|
-2	x 2			|4				| 1.236710 ms  | 0.812498 ms  | 2.145420 ms  | 0.855262 ms   | 4.672720 ms  |
-25	x 25		|625			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-50	x 50		|2,500			|  ERROR       |  ERROR       |  ERROR       |  ERROR        |  ERROR       |
-100 x 100		|10,000			| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-200 x 200		|40,000			| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  | 
-500 x 500		|1,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-1,500 x 1,500	|2,250,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
-2,000 x 2,000	|4,000,000		| 0.000000 ms  | 0.000000 ms  | 0.000000 ms  | 0.000000 ms   | 0.000000 ms  |
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3|
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.003548 s   | 0.002098 s   | 0.031445 s   | 
+25	x 25		|625			| 0.002542 s   | 0.002289 s   | 0.001970 s   |   
+50	x 50		|2,500			| 0.004001 s   | 0.003347 s   | 0.002551 s   | 
+100 x 100		|10,000			| 0.016078 s   | 0.025590 s   | 0.041590 s   |
+200 x 200		|40,000			| 0.054145 s   | 0.049041 s   | 0.071671 s   | 
+500 x 500		|250,000		| 0.593204 s   | 0.782953 s   | 0.628277 s   | 
+1,000 x 1,000	|1,000,000		| 7.991940 s   | 7.606290 s   | 7.705700 s   | 
+1,500 x 1,500	|2,250,000		| 26.71180 s   | 24.19720 s   | 24.50140 s   | 
+2,000 x 2,000	|4,000,000		| 77.18820 s   | 73.15850 s   | 74.93440 s   |  
 
-Error: the result matrix is not correct.
+
+
+
+### Number of threads: 8
+
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3|
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0.003808 s   | 0.003520 s   | 0.037883 s   | 
+25	x 25		|625			| 0.004066 s   | 0.026112 s   | 0.004563 s   |   
+50	x 50		|2,500			| 0.007793 s   | 0.006199 s   | 0.004467 s   | 
+100 x 100		|10,000			| 0.013294 s   | 0.018714 s   | 0.009567 s   | 
+200 x 200		|40,000			| 0.059391 s   | 0.042749 s   | 0.041908 s   | 
+500 x 500		|250,000		| 0.631150 s   | 0.729812 s   | 0.594458 s   | 
+1,000 x 1,000	|1,000,000		| 7.877320 s   | 8.428020 s   | 8.243770 s   | 
+1,500 x 1,500	|2,250,000		| 32.18740 s   | 30.61070 s   | 29.90000 s   | 
+2,000 x 2,000	|4,000,000		| 89.21210 s   | 89.62580 s   | 91.95300 s   |  
+
+
 
 
 >**NOTE**
 > Using the 'Cell' structure.
+
+
+
+Benchmark 5
+-----------
+
+The fifth benchmark is created by executing the parallel code with GPU in CUDA C++ using pthread.
+The code uses dynamic arrays and a dynamic number of threads. Each cell in the result matrix is performed by one thread.
+
+Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3| 
+----------------|---------------|--------------|--------------|--------------|
+2	x 2			|4				| 0. s   | 0. s   | 0. s   | 
+25	x 25		|625			| 0. s   | 0. s   | 0. s   | 
+50	x 50		|2,500			| 0. s   | 0. s   | 0. s   | 
+100 x 100		|10,000			| 0. s   | 0. s   | 0. s   | 
+200 x 200		|40,000			| 0. s   | 0. s   | 0. s   | 
+500 x 500		|250,000		| 0. s   | 0. s   | 0. s   | 
+1,000 x 1,000	|1,000,000		| 0. s   | 0. s   | 0. s   | 
+1,500 x 1,500	|2,250,000		| 0. s   | 0. s   | 0. s   | 
+2,000 x 2,000	|4,000,000		| 0. s   | 0. s   | 0. s   |
+
+
 
 
 Conclusion
@@ -263,5 +303,6 @@ Bugs
 	- solved the 01 May 2016
 - Error on benchmark 4 with matrix n x n where n > 2
 	- detected the 30 April 2016
+	- solved the 19 May 2016 by using pthread_join() function.
 
 
