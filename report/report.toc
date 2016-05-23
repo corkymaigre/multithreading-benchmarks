@@ -1,0 +1,17 @@
+\contentsline {section}{Introduction}{2}{section*.1}
+\contentsline {section}{Configuration}{2}{section*.2}
+\contentsline {subsection}{Hardware Specifications}{2}{section*.3}
+\contentsline {subsection}{IDE Configuration}{3}{section*.4}
+\contentsline {section}{Benchmarks}{4}{section*.5}
+\contentsline {subsection}{Benchmark 1}{4}{section*.6}
+\contentsline {subsection}{Benchmark 2}{5}{section*.7}
+\contentsline {subsection}{Benchmark 3}{6}{section*.8}
+\contentsline {subsection}{Benchmark 4}{7}{section*.9}
+\contentsline {subsubsection}{Number of threads: 2}{7}{section*.10}
+\contentsline {subsubsection}{Number of threads: 3}{7}{section*.11}
+\contentsline {subsubsection}{Number of threads: 4}{8}{section*.12}
+\contentsline {subsubsection}{Number of threads: 8}{8}{section*.13}
+\contentsline {subsection}{Benchmark 5}{9}{section*.14}
+\contentsline {section}{Comparison}{10}{section*.15}
+\contentsline {section}{Conclusion}{10}{section*.16}
+\contentsline {section}{Bugs}{12}{section*.17}

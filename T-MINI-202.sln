@@ -18,9 +18,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		assets\img\bench-2-1000-end.png = assets\img\bench-2-1000-end.png
 		assets\img\bench-3-2000-after.png = assets\img\bench-3-2000-after.png
 		assets\img\bench-3-2000-computation.png = assets\img\bench-3-2000-computation.png
+		report\bench1.txt = report\bench1.txt
 		assets\img\config-000.png = assets\img\config-000.png
+		report\img\config-000.png = report\img\config-000.png
 		assets\img\config-001.png = assets\img\config-001.png
+		report\img\config-001.png = report\img\config-001.png
+		report\data\dim1000-1-50.txt = report\data\dim1000-1-50.txt
+		report\data\dim1000-1-7.txt = report\data\dim1000-1-7.txt
+		report\data\dim1500-1-50.txt = report\data\dim1500-1-50.txt
+		report\data\dim1500-1-7.txt = report\data\dim1500-1-7.txt
+		report\data\dim200-1-50.txt = report\data\dim200-1-50.txt
+		report\data\dim200-1-7.txt = report\data\dim200-1-7.txt
+		report\data\dim2000-1-50.txt = report\data\dim2000-1-50.txt
+		report\data\dim2000-1-7.txt = report\data\dim2000-1-7.txt
+		report\data\dim500-1-50.txt = report\data\dim500-1-50.txt
+		report\data\dim500-1-7.txt = report\data\dim500-1-7.txt
+		report\pandoc\pandoc.aux = report\pandoc\pandoc.aux
+		report\pandoc\pandoc.log = report\pandoc\pandoc.log
+		report\pandoc\pandoc.out = report\pandoc\pandoc.out
+		report\pandoc\pandoc.pdf = report\pandoc\pandoc.pdf
+		report\pandoc\pandoc.synctex.gz = report\pandoc\pandoc.synctex.gz
+		report\pandoc\pandoc.tex = report\pandoc\pandoc.tex
 		README.md = README.md
+		report\report-corky-maigre.pdf = report\report-corky-maigre.pdf
+		report\report.aux = report\report.aux
+		report\report.log = report\report.log
+		report\report.out = report\report.out
+		report\report.synctex.gz = report\report.synctex.gz
+		report\report.tex = report\report.tex
+		report\report.toc = report\report.toc
 	EndProjectSection
 EndProject
 Global

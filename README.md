@@ -1,7 +1,7 @@
 Multithreading Benchmarks
 =========================
 
-This project intended to compare the performance of a console application using CPU & GPU programming.
+This project intended to compare the performance of a C/C++ console application using CPU & GPU programming.
 The console application consisted of doing a square matrix multiplication via several methods :
 - [CPU Programming]
 	- [Sequential code]
@@ -9,9 +9,10 @@ The console application consisted of doing a square matrix multiplication via se
 	- [Multithreading code (one thread per row of the result matrix)]
 	- [Multithreading code (each cell of the result matrix is assigned to one of the *n* threads)]
 - [GPU Programming]
-Each programming method was compared each other by doing a benchmark on the elapsed time for the computation.
 
-My personal information :
+Each programming method was compared each other by doing a benchmark on the elapsed time for the computation only.
+
+Information :
 - [Homepage](https://github.com/CorkyMaigre)
 - [Source files](https://github.com/CorkyMaigre/multithreading-benchmarks)
 - [Website](http://www.corkymaigre.be/)
@@ -20,7 +21,6 @@ My personal information :
 Table of contents
 =================
 
-- [Introduction](#introduction)
 - [Table of contents](#table-of-contents)
 - [Configuration](#configuration)
 	- [Hardware Specifications](#hardware-specifications)
@@ -30,14 +30,10 @@ Table of contents
 	- [Benchmark 2](#benchmark-2)
 	- [Benchmark 3](#benchmark-3)
 	- [Benchmark 4](#benchmark-4)
+	- [Benchmark 5](#benchmark-5)
 - [Conclusion](#conclusion)
 - [Contribute](#contribute)
 - [Bugs](#bugs)
-
-
-Introduction
-============
-
 
 
 
@@ -47,7 +43,7 @@ Configuration
 Hardware Specifications
 -----------------------
 
-Using an ASUS X93S Series laptop.
+Using an ASUS X93S Series laptop whose the charasteristics are listed below :
 
 Charasteristics | Description
 ----------------|------------
@@ -56,34 +52,38 @@ Operating System| Windows 7 Home Premium
 Chipset			| Intel HM65 Express
 Memory			| DDR3 1333 MHz SDRAM, 4096 MB, (1 x 4096 MB)
 Display			| 18.4" 16:9 Full HD (1920x1080) LED Backlight
-Graphic			| NVIDIA® GeForce® GT 540M with 1GB DDR3 VRAM
+Graphic			| NVIDIAÂ® GeForceÂ® GT 540M with 1GB DDR3 VRAM
 Storage			| 1 TB 7200 rpm
 Optical Drive	| DVD player
 Card Reader		| Card reader ( SD/ SDHC/ MS/ MS Pro/ MMC)
 Webcam			| 0.3 Mega Pixel Fixed web camera
-Networking		| Integrated 802.11 b/g/n, Bluetooth™ V2.1+EDR, 10/100/1000 Base T
+Networking		| Integrated 802.11 b/g/n, Bluetoothâ„¢ V2.1+EDR, 10/100/1000 Base T
 Interface		| 1 x Microphone-in jack, 1 x Headphone-out jack, 1 x VGA port / Mini D-sub 15 pins for external monitor, 1 x USB 3.0 port, 3 x USB 2.0 ports, 1 x RJ45 LAN Jack for LAN insert, 1 x HDMI
-Audio			| Built-in Speakers And Microphone, SonicFocus, Altec Lansing® Speakers
+Audio			| Built-in Speakers And Microphone, SonicFocus, Altec LansingÂ® Speakers
 Battery			| 6Cells : 5200 mAh 56 Whrs
 Power Adapter	| Output : 19 V DC, 6.3 A, 120 W Input : 100 -240 V AC, 50/60 Hz universal
 Dimensions		| 44.1 x 29.5 x 4.23 ~5.59 cm (WxDxH)
 Weight			| 4.11 kg (with 6 cell battery)
-Note			| Master HDD: 3.5” SATA, Second HDD: 2.5” SATA
+Note			| Master HDD: 3.5â€ SATA, Second HDD: 2.5â€ SATA
 
 
 IDE Configuration
 -----------------
 
-The IDE used is Visual Studio Community 2015.
+For this project, Visual Studio Community 2015 was used for CPU programming with the pthread library and Visual Studio 2013 was used for GPU programming with CUDA since CUDA is not supported in VC 2015.
 
-First of all, you have to set that we use pthread library by typing 'pthreadVC2.lib' into the additional dependencies found at
+>**CAUTION**
+> Visual Studio Community 2015 does not support CUDA yet. You need to use an older version of VC such as Visual Studio 2013.
+
+
+First of all, you have to set that pthread library is used by typing 'pthreadVC2.lib' into the additional dependencies found at
 'Property' > 'Links Editor' > 'Additional Dependencies' as shown on the picture below.
 <img src="assets/img/config-000.png" width="600px" />
 
 >**CAUTION**
 > It is possible that you need to type 'HAVE_STRUCT_TIMESPEC' into the preprocessor definition found at
 >'Property' > 'C/C++' > 'Preprocessor' > 'Preprocessor Definition' as shown on the picture below.
-> Otherwise you will have this error message: Error C2011 'timespec' : redefinition of type 'struct'
+> Otherwise you will have this error message: Error C2011 'timespec'Â : redefinition of type 'struct'
 <img src="assets/img/config-001.png" width="600px" />
 
 
@@ -91,13 +91,12 @@ First of all, you have to set that we use pthread library by typing 'pthreadVC2.
 Benchmarks
 ==========
 
-All benchmarks presented here are resulted from one console application consisting of doing a matrix multiplication.
-Each benchmark is computed for a specific use of threading.
+All benchmarks presented here are resulted from a specific use of threading such as the number of threads doing the computation.
 
 Benchmark 1
 -----------
 
-This first benchmark is created by executing the sequential code with CPU in C++. The code uses dynamic arrays and a 'Matrix' structure.
+This first benchmark is created by executing the C++ sequential code with CPU. The code uses dynamic arrays and a 'Matrix' structure.
 
 Matrix Dimension|Number of cells|Elapsed Time 1|Elapsed Time 2|Elapsed Time 3|
 ----------------|---------------|--------------|--------------|--------------|

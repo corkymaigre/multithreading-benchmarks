@@ -1,0 +1,652 @@
+
+\documentclass[]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% \usepackage[top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphics,graphicx} % Required for including pictures
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{xcolor} % Required for specifying colors by name
+\usepackage{verbatim}
+
+\makeatletter
+\newcommand*{\toccontents}{\@starttoc{toc}}
+\makeatother
+
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage{longtable,booktabs}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+% \myFigure
+% {Title}{url}{scale}
+\newcommand\myFigure[3]{%
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=#3]{img/#2}
+		\end{center}
+		\setlength\abovecaptionskip{-1px}
+		\caption{#1.\label{fig:#2}}
+	\end{figure}
+}
+
+
+\title{Multithreading Benchmarks}
+\author{Corky Maigre}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+% \begin{abstract}
+% sfsdfsd
+% \end{abstract}
+
+\toccontents
+
+
+
+
+
+\section{Introduction}\label{introduction}
+
+This project intended to compare the performance of a C/C++ console
+application using CPU \& GPU programming. The console application
+consisted of doing a square matrix multiplication via several methods :
+\begin{itemize}
+	\item CPU Programming
+	\begin{itemize}
+		\item Sequential code
+		\item Multithreading code (one thread per cell of the result matrix)
+		\item Multithreading code (one thread per row of the result matrix)
+		\item Multithreading code (each cell of the result matrix is assigned to one of the \emph{n} threads)
+	\end{itemize}
+	\item GPU Programming
+\end{itemize}
+
+
+Each programming method was compared each other by doing a benchmark on
+the elapsed time for the computation only.
+
+Information : - \href{https://github.com/CorkyMaigre}{Homepage} -
+\href{https://github.com/CorkyMaigre/multithreading-benchmarks}{GitHub} - \href{http://www.corkymaigre.be/}{Website}
+
+
+\hyperdef{}{configuration}{\section{Configuration}\label{configuration}}
+
+\hyperdef{}{hardware-specifications}{\subsection{Hardware
+Specifications}\label{hardware-specifications}}
+
+Using an ASUS X93S Series laptop whose the charasteristics are listed
+below :
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule\addlinespace
+Charasteristics & Description
+\\\addlinespace
+\midrule\endhead
+Processor & Intel Core i5 2430M 2.4 GHz \textasciitilde{} 2.9 GHz
+\\\addlinespace
+Operating System & Windows 7 Home Premium
+\\\addlinespace
+Chipset & Intel HM65 Express
+\\\addlinespace
+Memory & DDR3 1333 MHz SDRAM, 4096 MB, (1 x 4096 MB)
+\\\addlinespace
+Display & 18.4" 16:9 Full HD (1920x1080) LED Backlight
+\\\addlinespace
+Graphic & NVIDIA® GeForce® GT 540M with 1GB DDR3 VRAM
+\\\addlinespace
+Storage & 1 TB 7200 rpm
+\\\addlinespace
+Optical Drive & DVD player
+\\\addlinespace
+Card Reader & Card reader ( SD/ SDHC/ MS/ MS Pro/ MMC)
+\\\addlinespace
+Webcam & 0.3 Mega Pixel Fixed web camera
+\\\addlinespace
+Networking & Integrated 802.11 b/g/n, Bluetooth™ V2.1+EDR,
+\\\addlinespace
+&10/100/1000 Base T
+\\\addlinespace
+Interface & 1 x Microphone-in jack, 1 x Headphone-out jack,
+\\\addlinespace
+&
+1 x VGA port
+/ Mini D-sub 15 pins for external monitor,
+\\\addlinespace
+&  1 x USB 3.0 port, 3 x USB 2.0
+ports, 1 x RJ45 LAN Jack
+\\\addlinespace
+& for LAN insert, 1 x HDMI
+\\\addlinespace
+Audio & Built-in Speakers And Microphone, SonicFocus,
+\\\addlinespace
+& Altec Lansing® Speakers
+\\\addlinespace
+Battery & 6Cells : 5200 mAh 56 Whrs
+\\\addlinespace
+Power Adapter & Output : 19 V DC, 6.3 A, 120 W Input : 100 -240 V AC,
+\\\addlinespace
+& 50/60 Hz universal
+\\\addlinespace
+Dimensions & 44.1 x 29.5 x 4.23 \textasciitilde{}5.59 cm (WxDxH)
+\\\addlinespace
+Weight & 4.11 kg (with 6 cell battery)
+\\\addlinespace
+Note & Master HDD: 3.5'' SATA, Second HDD: 2.5'' SATA
+\\\addlinespace
+\bottomrule
+\\\addlinespace
+\caption{Hardware specifications.}
+\end{longtable}
+
+\hyperdef{}{ide-configuration}{\subsection{IDE
+Configuration}\label{ide-configuration}}
+
+For this project, Visual Studio Community 2015 was used for CPU
+programming with the pthread library and Visual Studio 2013 was used for
+GPU programming with CUDA since CUDA is not supported in VC 2015.
+
+\begin{quote}
+\textbf{CAUTION} Visual Studio Community 2015 does not support CUDA yet.
+You need to use an older version of VC such as Visual Studio 2012 \& 2013.
+\end{quote}
+
+First of all, you have to set that pthread library is used by typing
+`pthreadVC2.lib' into the additional dependencies found at \verb/Property/
+\textgreater{} \verb/Links Editor/ \textgreater{} \verb/Additional Dependencies/
+as shown on the picture \ref{fig:config-000}.
+
+\myFigure{Using pthread}{config-000}{0.4}
+
+\begin{quote}
+\textbf{CAUTION} It is possible that you need to type
+\verb/HAVE STRUCT TIMESPEC/ into the preprocessor definition found at
+\verb/Property/ \textgreater{} C/C++ \textgreater{} \verb/Preprocessor/
+\textgreater{} \verb/Preprocessor Definition/ as shown on the picture \ref{fig:config-001}.
+Otherwise you will have this error message: Error C2011 `timespec'~:
+redefinition of type `struct'
+\end{quote}
+
+\myFigure{Timespec error}{config-001}{0.4}
+
+
+\hyperdef{}{benchmarks}{\section{Benchmarks}\label{benchmarks}}
+
+All benchmarks presented here are resulted from a specific use of
+threading such as the number of threads doing the computation.
+
+\hyperdef{}{benchmark-1}{\subsection{Benchmark 1}\label{benchmark-1}}
+
+This first benchmark is created by executing the C++ sequential code
+with CPU. The code uses dynamic arrays and a `Matrix' structure.
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 1.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time 
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.000000 s 
+\\\addlinespace
+25 x 25 & 625 & 0.000149 s 
+\\\addlinespace
+50 x 50 & 2,500 & 0.001165 s 
+\\\addlinespace
+100 x 100 & 10,000 & 0.008968 s 
+\\\addlinespace
+200 x 200 & 40,000 & 0.071950 s 
+\\\addlinespace
+500 x 500 & 250,000 & 0.934330 s 
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 15.01570 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 55.67037 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 142.5680 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+
+\hyperdef{}{benchmark-2}{\subsection{Benchmark 2}\label{benchmark-2}}
+
+The second benchmark is created by executing the parallel code with CPU
+in C++ using pthread. The code uses dynamic arrays and a dynamic number
+of threads. Each cell in the result matrix is performed by one thread.
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 2.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.001207 s 
+\\\addlinespace
+25 x 25 & 625 & 0.558716 s
+\\\addlinespace
+50 x 50 & 2,500 & 1.841263 s
+\\\addlinespace
+100 x 100 & 10,000 & 8.092927 s
+\\\addlinespace
+200 x 200 & 40,000 & 33.41967 s
+\\\addlinespace
+500 x 500 & 250,000 & 213.4013 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 936.1580 s 
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 0.000000 s 
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 0.000000 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+Before launching the console application for a square matrix of 1,000 x
+1,000, the memory is low (but Visual Studio takes a big part of memory).
+
+At the end of the console application for a square matrix of 1,000 x
+1,000, the memory is full because all pointers take a lot of space and
+there are 1,000,000 of threads in memory. When the application finished, all the memory is released.
+
+\begin{quote}
+\textbf{NOTE} The execution times for 1500x1500 and 2000x2000 matrice dimension has not been calculated since it takes more than 15 minutes.
+\end{quote}
+
+
+\hyperdef{}{benchmark-3}{\subsection{Benchmark 3}\label{benchmark-3}}
+
+The third benchmark is created by executing the parallel code with CPU
+in C++ using pthread. The code uses dynamic arrays and a dynamic number
+of threads. Each row in the result matrix is performed by one thread.
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 3.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.000451 s
+\\\addlinespace
+25 x 25 & 625 & 0.012860 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.025046 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.057352 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.112013 s
+\\\addlinespace
+500 x 500 & 250,000 & 1.108248 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 8.496977 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 26.31603 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 44.62573 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\hyperdef{}{benchmark-4}{\subsection{Benchmark 4}\label{benchmark-4}}
+
+The fourth benchmark is created by executing the parallel code with CPU
+in C++ using pthread. The code uses dynamic arrays and a dynamic number
+of threads. Cells in the result matrix are performed by one of the
+threads according to a shifting algorithm.
+
+\subsubsection{Number of threads: 2}\label{number-of-threads-2}
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 4 with 2 threads.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.002106 s
+\\\addlinespace
+25 x 25 & 625 & 0.001467 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.003618 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.023646 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.051373 s
+\\\addlinespace
+500 x 500 & 250,000 & 1.031829 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 10.90120 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 38.62227 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 101.9047 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+\subsubsection{Number of threads: 3}\label{number-of-threads-3}
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 4 with 3 threads.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.011413 s
+\\\addlinespace
+25 x 25 & 625 & 0.003701 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.0042903 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.009855 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.051281 s
+\\\addlinespace
+500 x 500 & 250,000 & 0.733569 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 7.827880 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 30.25893 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 87.41533 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+\subsubsection{Number of threads: 4}\label{number-of-threads-4}
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 4 with 4 threads.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.123637 s
+\\\addlinespace
+25 x 25 & 625 & 0.002267 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.003300 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.027753 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.058286 s
+\\\addlinespace
+500 x 500 & 250,000 & 0.668145 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 7.767977 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 25.13680 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 75.09370 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+\subsubsection{Number of threads: 8}\label{number-of-threads-8}
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 4 with 8 threads.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.015070 s
+\\\addlinespace
+25 x 25 & 625 & 0.031699 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.006153 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.013858 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.048016 s
+\\\addlinespace
+500 x 500 & 250,000 & 0.651807 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 8.183037 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 30.89937 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 90.26363 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+\begin{quote}
+\textbf{NOTE} Using the `Cell' structure.
+\end{quote}
+
+\hyperdef{}{benchmark-5}{\subsection{Benchmark 5}\label{benchmark-5}}
+
+The fifth benchmark is created by executing the parallel code with GPU
+in CUDA C++. The code uses dynamic arrays and a dynamic
+number of threads. Each cell in the result matrix is performed by one
+thread.
+The elapsed time is determined by an average of three tests.
+
+\begin{longtable}[c]{@{}ccc@{}}
+\caption{Execution times for benchmark 5.}
+\\\addlinespace
+\toprule\addlinespace
+Matrix Dimension & Number of cells & Average Elapsed Time
+\\\addlinespace
+\midrule\endhead
+2 x 2 & 4 & 0.000098 s
+\\\addlinespace
+25 x 25 & 625 & 0.000110 s
+\\\addlinespace
+50 x 50 & 2,500 & 0.000174 s
+\\\addlinespace
+100 x 100 & 10,000 & 0.000537 s
+\\\addlinespace
+200 x 200 & 40,000 & 0.004506 s
+\\\addlinespace
+500 x 500 & 250,000 & 0.066445 s
+\\\addlinespace
+1,000 x 1,000 & 1,000,000 & 0.537397 s
+\\\addlinespace
+1,500 x 1,500 & 2,250,000 & 1.851377 s
+\\\addlinespace
+2,000 x 2,000 & 4,000,000 & 3.164927 s
+\\\addlinespace
+\bottomrule
+\end{longtable}
+
+
+
+
+\hyperdef{}{conclusion}{\section{Comparison}\label{conclusion}}
+
+Consider the dimensions below for all benchmarks :
+\begin{itemize}
+	\item 200 x 200
+	\item 500 x 500
+	\item 1,000 x 1,000
+	\item 1,500 x 1,500
+	\item 2,000 x 2,000
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.5]
+	\foreach \x in {0, 5, ..., 20} \draw(\x,15)node[above]{\x};
+	\foreach \n/\y in
+	{
+		Benchmark 5/13,
+		Benchmark 4/10,
+		Benchmark 3/7,
+		Benchmark 2/4,
+		Benchmark 1/1
+	}
+	\draw (0,\y) node[left] {\n};
+	\draw (0,-1.5) grid[xstep=1,ystep=1.5] (20,15);
+	\draw[line width=2mm,color=red!50,yshift=8mm] plot[xcomb] file {data/dim200-1-50.txt};
+	\draw[line width=2mm,color=green!50,yshift=4mm] plot[xcomb] file {data/dim500-1-50.txt};
+	\draw[line width=2mm,color=blue!50,yshift=0mm] plot[xcomb] file {data/dim1000-1-50.txt};
+	\draw[line width=2mm,color=orange!50,yshift=-4mm] plot[xcomb] file {data/dim1500-1-50.txt};
+	\draw[line width=2mm,color=purple!50,yshift=-8mm] plot[xcomb] file {data/dim2000-1-50.txt};
+	\draw (15,11)node[fill=red!50, above]{200 x 200};
+	\draw (15,10)node[fill=green!50, above]{500 x 500};
+	\draw (15,9)node[fill=blue!50, above]{1000 x 1000};
+	\draw (15,8)node[fill=orange!50, above]{1500 x 1500};
+	\draw (15,7)node[fill=purple!50, above]{2000 x 2000};
+\end{tikzpicture}
+\caption{Execution time in milliseconds (scale: $\frac{1}{50}$)}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.5]
+	\foreach \x in {0, 5, ..., 20} \draw(\x,15)node[above]{\x};
+	\foreach \n/\y in
+	{
+		Benchmark 5/13,
+		Benchmark 4/10,
+		Benchmark 3/7,
+		Benchmark 1/1
+	}
+	\draw (0,\y) node[left] {\n};
+	\draw (0,-1.5) grid[xstep=1,ystep=1.5] (20,15);	
+	\draw[line width=2mm,color=red!50,yshift=8mm] plot[xcomb] file {data/dim200-1-7.txt};
+	\draw[line width=2mm,color=green!50,yshift=4mm] plot[xcomb] file {data/dim500-1-7.txt};
+	\draw[line width=2mm,color=blue!50,yshift=0mm] plot[xcomb] file {data/dim1000-1-7.txt};
+	\draw[line width=2mm,color=orange!50,yshift=-4mm] plot[xcomb] file {data/dim1500-1-7.txt};
+	\draw[line width=2mm,color=purple!50,yshift=-8mm] plot[xcomb] file {data/dim2000-1-7.txt};
+	\draw (15,11)node[fill=red!50, above]{200 x 200};
+	\draw (15,10)node[fill=green!50, above]{500 x 500};
+	\draw (15,9)node[fill=blue!50, above]{1000 x 1000};
+	\draw (15,8)node[fill=orange!50, above]{1500 x 1500};
+	\draw (15,7)node[fill=purple!50, above]{2000 x 2000};	
+\end{tikzpicture}
+\caption{Execution time in milliseconds (scale: $\frac{1}{7}$)}
+\end{figure}
+
+
+
+
+
+
+
+\hyperdef{}{conclusion}{\section{Conclusion}\label{conclusion}}
+
+
+In conclusion, threads have to be well assigned for a better performance. For instance, the execution of
+the code of benchmark 2 takes a long time because each cell of the result matrice is computed by an
+unique thread. Thus, there are a lot of threads ($n\times n$) and the operating system must open and close them
+via a preemptive method since the number of threads is limited by the machine power.
+In this case, the execution of the sequential code
+(\emph{i.e.}, no threads) of benchmark 1 is faster than the one of the code of benchmark 2.
+~\\
+
+Besides, when the matrices dimension are too small, the use of threads has not a big impact on the performance since
+only a little gain of performance has been reported.
+~\\
+
+However, when threads are well assigned, we can massively gain in performance. For example, the benchmark 3 is better than the
+two previous benchmarks and there are $n$ threads since only one thread per row is created.
+~\\
+
+We can go further with benchmark 4 by assigning a static number of threads for the matrices computation.
+This allows to set the number of threads of the machine. For example, we tested 2, 3, 4, and 8 threads on benchmark 4, and the
+result is that using four threads gives the best performance. It is logic because the test machines has only four threads.
+The threads are alternately assigned to the result matrice cells via an custom algorithm.
+~\\
+
+
+Finally, GPU programming largely beats CPU programming on performance with very low execution times compared to
+the ones of CPU codes.
+
+
+
+\hyperdef{}{bugs}{\section{Bugs}\label{bugs}}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Error with the memory deleting:
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    detected the 01 May 2016
+  \item
+    solved the 01 May 2016
+  \end{itemize}
+\item
+  Error on benchmark 4 with matrix n x n where n \textgreater{} 2
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    detected the 30 April 2016
+  \item
+    solved the 19 May 2016 by using pthread\_join() function.
+  \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
